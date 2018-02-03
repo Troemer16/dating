@@ -3,3 +3,29 @@ img
     width: 100%;
     height: auto;
 }
+
+label
+{
+    font-weight: bold;
+    margin-bottom: 0.5%;
+}
+
+label.form-check-label
+{
+    font-weight: normal !important;
+    margin-right: 3%;
+}
+
+div.form-check-inline
+{
+    width: 100%;
+}
+
+p#note
+{
+    margin-top: 1.5em;
+    border: solid #dee2e6;
+    padding: 0.5em;
+    background: #e9ecef;
+    border-radius: 0.5em;
+}

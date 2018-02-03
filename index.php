@@ -19,6 +19,11 @@
         echo $view->render('pages/home.html');
     });
 
+    $f3->route('GET /personal', function() {
+        $view = new View;
+        echo $view->render('pages/personal.html');
+    });
+
     //Run Fat-Free
     $f3->run();
 ?>
