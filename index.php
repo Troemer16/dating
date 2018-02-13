@@ -5,6 +5,8 @@
 
     //require the autoload file
     require_once ('vendor/autoload.php');
+    //include validation functions
+    include ('model/validation.php');
 
     //create an instance of the base class
     $f3 = Base::instance();
@@ -15,13 +17,43 @@
 
     //Define a default route
     $f3->route('GET /', function() {
-        $view = new View;
-        echo $view->render('pages/home.html');
+        $template = new Template();
+        echo $template->render('views/home.html');
     });
 
-    $f3->route('GET /personal', function() {
-        $view = new View;
-        echo $view->render('pages/personal.html');
+    $f3->route('GET|POST /personal', function() {
+        if(isset($_POST['submit']))
+        {
+            header("Location: http://troemer.greenriverdev.com/328/dating/profile");
+        }
+
+        $template = new Template();
+        echo $template->render('views/personal.html');
+    });
+
+    $f3->route('GET|POST /profile', function() {
+        if(isset($_POST['submit']))
+        {
+            header("Location: http://troemer.greenriverdev.com/328/dating/interests");
+        }
+
+        $template = new Template();
+        echo $template->render('views/profile.html');
+    });
+
+    $f3->route('GET|POST /interests', function() {
+        if(isset($_POST['submit']))
+        {
+            header("Location: http://troemer.greenriverdev.com/328/dating/summary");
+        }
+
+        $template = new Template();
+        echo $template->render('views/interests.html');
+    });
+
+    $f3->route('GET|POST /summary', function() {
+        $template = new Template();
+        echo $template->render('views/summary.html');
     });
 
     //Run Fat-Free

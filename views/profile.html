@@ -1,0 +1,66 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
+          crossorigin="anonymous">
+    <link rel="stylesheet" type="text/css" href="styles/styles.css">
+    <title>Profile</title>
+</head>
+    <body>
+        <nav class="navbar navbar-light bg-faded">
+            <a class="navbar-brand" href="http://troemer.greenriverdev.com/328/dating">Dating Site</a>
+        </nav>
+
+        <div class="container">
+            <h1>Profile</h1>
+            <hr>
+            <form action="#" method="post">
+                <div class="row">
+                    <section class="col-8">
+                        <label class="form-control-label">Email</label>
+                        <input type="text" name="email" class="form-control"><br>
+
+                        <label class="form-control-label">State</label>
+                        <select name="state" class="form-control">
+                            <option selected>---Select---</option>
+                            <option value="wa">Washington</option>
+                            <option value="or">Oregon</option>
+                            <option value="ca">California</option>
+                            <option value="id">Idaho</option>
+                        </select><br>
+
+                        <label>Seeking</label><br>
+                        <div class="form-check form-check-inline">
+                            <label class="form-check-label">
+                                <input type="radio" name="seeking" value="male" class="form-check-input">Male
+                            </label>
+                            <label class="form-check-label">
+                                <input type="radio" name="seeking" value="female" class="form-check-input">Female
+                            </label>
+                        </div><br>
+                    </section>
+
+
+                    <section class="col-4">
+                        <label class="form-control-label">Biography</label>
+                        <textarea name="bio" class="form-control" rows="5"></textarea>
+                    </section>
+                </div>
+                <div class="row">
+                    <div id="btn">
+                        <button type="submit" name="submit" class="btn btn-primary">Next ></button>
+                    </div>
+
+                </div>
+
+            </form>
+        </div>
+
+
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.6/umd/popper.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/js/bootstrap.min.js"></script>
+    </body>
+<html>

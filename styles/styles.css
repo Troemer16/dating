@@ -1,3 +1,35 @@
+nav
+{
+    background: #e9ecef;
+    border-bottom: solid 0.2em #dee2e6;
+}
+
+div.container
+{
+    border: lightgray solid 0.2em;
+    padding: 1em;
+    padding-right: 3em;
+    margin-top: 2em;
+    border-radius: 0.5em
+}
+
+div.form-check-inline
+{
+    width: 100%;
+}
+
+div#btn
+{
+    text-align: right;
+    width: 100%;
+}
+
+div#contact
+{
+    text-align: center;
+    width: 100%;
+}
+
 img
 {
     width: 100%;
@@ -16,9 +48,14 @@ label.form-check-label
     margin-right: 3%;
 }
 
-div.form-check-inline
+label.first
 {
-    width: 100%;
+    margin-left: 4em;
+}
+
+h4
+{
+    font-weight: normal;
 }
 
 p#note
@@ -28,4 +65,9 @@ p#note
     padding: 0.5em;
     background: #e9ecef;
     border-radius: 0.5em;
+}
+
+p#summaryBio
+{
+    text-align: center;
 }
