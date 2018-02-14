@@ -22,47 +22,74 @@
                 <div class="row">
                     <section class="col-3">
                         <label class="form-check-label first">
-                            <input type="checkbox" class="form-check-input">TV
+                            <input type="checkbox" class="form-check-input" name="indoor[]" value="tv"
+                            <check if="{{ !empty(@indoor) && in_array(tv, @indoor) }}">
+                                checked
+                            </check>>TV
                         </label>
                     </section>
                     <section class="col-3">
                         <label class="form-check-label">
-                            <input type="checkbox" class="form-check-input">Movies
+                            <input type="checkbox" class="form-check-input" name="indoor[]" value="movies"
+                            <check if="{{ !empty(@indoor) && in_array(movies, @indoor) }}">
+                                checked
+                            </check>>Movies
                         </label>
                     </section>
                     <section class="col-3">
                         <label class="form-check-label">
-                            <input type="checkbox" class="form-check-input">Cooking
+                            <input type="checkbox" class="form-check-input" name="indoor[]" value="cooking"
+                            <check if="{{ !empty(@indoor) && in_array(cooking, @indoor) }}">
+                                checked
+                            </check>>Cooking
                         </label>
                     </section>
                     <section class="col-3">
                         <label class="form-check-label">
-                            <input type="checkbox" class="form-check-input">Board games
+                            <input type="checkbox" class="form-check-input" name="indoor[]" value="board"
+                            <check if="{{ !empty(@indoor) && in_array(board, @indoor) }}">
+                                checked
+                            </check>>Board games
                         </label>
                     </section>
                 </div>
                 <div class="row">
                     <section class="col-3">
                         <label class="form-check-label first">
-                            <input type="checkbox" class="form-check-input">Puzzles
+                            <input type="checkbox" class="form-check-input" name="indoor[]" value="puzzles"
+                            <check if="{{ !empty(@indoor) && in_array(puzzles, @indoor) }}">
+                                checked
+                            </check>>Puzzles
                         </label>
                     </section>
                     <section class="col-3">
                         <label class="form-check-label">
-                            <input type="checkbox" class="form-check-input">Reading
+                            <input type="checkbox" class="form-check-input" name="indoor[]" value="reading"
+                            <check if="{{ !empty(@indoor) && in_array(reading, @indoor) }}">
+                                checked
+                            </check>>Reading
                         </label>
                     </section>
                     <section class="col-3">
                         <label class="form-check-label">
-                            <input type="checkbox" class="form-check-input">Playing card
+                            <input type="checkbox" class="form-check-input" name="indoor[]" value="cards"
+                            <check if="{{ !empty(@indoor) && in_array(cards, @indoor) }}">
+                                checked
+                            </check>>Playing card
                         </label>
                     </section>
                     <section class="col-3">
                         <label class="form-check-label">
-                            <input type="checkbox" class="form-check-input">Video games
+                            <input type="checkbox" class="form-check-input" name="indoor[]" value="video"
+                            <check if="{{ !empty(@indoor) && in_array(video, @indoor) }}">
+                                checked
+                            </check>>Video games
                         </label>
                     </section>
                 </div>
+                <check if="{{ @errors['indoor'] }}">
+                    <p class="text-danger">{{ @errors['indoor'] }}</p>
+                </check>
 
 
 
@@ -70,22 +97,34 @@
                 <div class="row">
                     <section class="col-3">
                         <label class="form-check-label first">
-                            <input type="checkbox" class="form-check-input">Hiking
+                            <input type="checkbox" class="form-check-input" name="outdoor[]" value="hiking"
+                            <check if="{{ !empty(@outdoor) && in_array(hiking, @outdoor) }}">
+                                checked
+                            </check>>Hiking
                         </label>
                     </section>
                     <section class="col-3">
                         <label class="form-check-label">
-                            <input type="checkbox" class="form-check-input">Biking
+                            <input type="checkbox" class="form-check-input" name="outdoor[]" value="biking"
+                            <check if="{{ !empty(@outdoor) && in_array(biking, @outdoor) }}">
+                                checked
+                            </check>>Biking
                         </label>
                     </section>
                     <section class="col-3">
                         <label class="form-check-label">
-                            <input type="checkbox" class="form-check-input">Swimming
+                            <input type="checkbox" class="form-check-input" name="outdoor[]" value="swimming"
+                            <check if="{{ !empty(@outdoor) && in_array(swimming, @outdoor) }}">
+                                checked
+                            </check>>Swimming
                         </label>
                     </section>
                     <section class="col-3">
                         <label class="form-check-label">
-                            <input type="checkbox" class="form-check-input">Collecting
+                            <input type="checkbox" class="form-check-input" name="outdoor[]" value="collecting"
+                            <check if="{{ !empty(@outdoor) && in_array(collecting, @outdoor) }}">
+                                checked
+                            </check>>Collecting
                         </label>
                     </section>
                 </div>
@@ -93,15 +132,24 @@
                 <div class="row">
                     <section class="col-3">
                         <label class="form-check-label first">
-                            <input type="checkbox" class="form-check-input">Walking
+                            <input type="checkbox" class="form-check-input" name="outdoor[]" value="walking"
+                            <check if="{{ !empty(@outdoor) && in_array(walking, @outdoor) }}">
+                                checked
+                            </check>>Walking
                         </label>
                     </section>
                     <section class="col-3">
                         <label class="form-check-label">
-                            <input type="checkbox" class="form-check-input">Climbing
+                            <input type="checkbox" class="form-check-input" name="outdoor[]" value="climbing"
+                            <check if="{{ !empty(@outdoor) && in_array(climbing, @outdoor) }}">
+                                checked
+                            </check>>Climbing
                         </label>
                     </section>
                 </div>
+                <check if="{{ @errors['outdoor'] }}">
+                    <p class="text-danger">{{ @errors['outdoor'] }}</p>
+                </check>
 
                 <div class="row">
                     <div id="btn">

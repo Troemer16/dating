@@ -1,68 +1,71 @@
 <?php
-    function validName($name, &$errors) {
-        if(!isEmpty($name)){
+    function validName($name) {
+        if(!empty($name)){
             if(ctype_alpha($name))
-                return true;
+                return '';
             else
-                $errors['name'] = '<p>Name can only contain letters.</p>';
+                return 'name can only contain letters.';
         }
         else
-            $errors['name'] = '<p>Name is required</p>';
-        return false;
+            return 'name is required';
     }
 
-    function validAge($age, &$errors) {
-        if(!isEmpty($age)){
+    function validAge($age) {
+        if(!empty($age)){
             if(is_numeric($age)){
-                if($age > 18)
-                    return true;
+                if($age >= 18)
+                    return '';
                 else
-                    $errors['age'] = '<p>You must be over 18yrs old.</p>';
+                    return 'You must be over 18yrs old.';
             }
             else
-                $errors['age'] = '<p>Age must be a number.</p>';
+                return 'Age must be a number.';
         }
-        else {
-            $errors['age'] = '<p>Age is required</p>';
-        }
-        return false;
+        else
+            return 'Age is required';
     }
 
-    function validPhone($phone, &$errors) {
-        if(!isEmpty($phone)){
+    function validPhone($phone) {
+        if(!empty($phone)){
             if(is_numeric($phone)){
                 if(strlen($phone) == 10)
-                    return true;
+                    return '';
                 else
-                    $errors['phone'] = '<p>Phone number must be 10 digits.</p>';
+                    return'Phone number must be 10 digits.';
             }
             else
-                $errors['phone'] = '<p>Phone number must contain only number, no special characters.</p>';
+                return 'Phone number must contain only number, no special characters.';
         }
         else
-            $errors['phone'] = '<p>Phone number is required.</p>';
-
-        return false;
+            return 'Phone number is required.';
     }
 
-    function validOutdoor($outdoor, &$errors) {
-        $input = array('hiking', 'biking', 'swimming', 'collecting', 'walking', 'climbing');
+    function validPersonal($first, $last, $age, $phone, &$errors){
+        $errors['first'] = validName($first);
+        $errors['last'] = validName($last);
+        $errors['age'] = validAge($age);
+        $errors['phone'] = validPhone($phone);
+
+        if(empty(implode("", $errors)))
+            return true;
+        else
+            return false;
+    }
+
+    function validOutdoor($outdoor) {
+        $input = array('hiking', 'biking', 'swimming', 'collecting', 'walking', 'climbing', '');
         foreach ($outdoor as $interest) {
-            if(!in_array($interest, $input)) {
-                $errors['outdoor'] = '<p>Please select valid outdoor interests.</p>';
-                return false;
-            }
+            if(!in_array($interest, $input))
+                return 'Please select valid outdoor interests.';
         }
-        return true;
+        return '';
     }
 
-    function validIndoor($indoor, &$errors) {
-        $input = array('tv', 'movies', 'cooking', 'board', 'puzzle', 'reading', 'cards', 'video');
+    function validIndoor($indoor) {
+        $input = array('tv', 'movies', 'cooking', 'board', 'puzzles', 'reading', 'cards', 'video', '');
         foreach ($indoor as $interest) {
-            if(!in_array($interest, $input)) {
-                $errors['indoor'] = '<p>Please select valid indoor interests.</p>';
-                return false;
-            }
+            if(!in_array($interest, $input))
+                return 'Please select valid indoor interests.';
         }
-        return true;
+        return '';
     }

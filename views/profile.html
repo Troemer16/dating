@@ -20,24 +20,30 @@
                 <div class="row">
                     <section class="col-8">
                         <label class="form-control-label">Email</label>
-                        <input type="text" name="email" class="form-control"><br>
+                        <input type="text" name="email" class="form-control" value="{{ @email }}"><br>
 
                         <label class="form-control-label">State</label>
                         <select name="state" class="form-control">
                             <option selected>---Select---</option>
-                            <option value="wa">Washington</option>
-                            <option value="or">Oregon</option>
-                            <option value="ca">California</option>
-                            <option value="id">Idaho</option>
+                            <option value="washington" <check if="{{ @state == washington }}">selected</check>>Washington</option>
+                            <option value="oregon" <check if="{{ @state == oregon }}">selected</check>>Oregon</option>
+                            <option value="california" <check if="{{ @state == california }}">selected</check>>California</option>
+                            <option value="idaho" <check if="{{ @state == idaho }}">selected</check>>Idaho</option>
                         </select><br>
 
                         <label>Seeking</label><br>
                         <div class="form-check form-check-inline">
                             <label class="form-check-label">
-                                <input type="radio" name="seeking" value="male" class="form-check-input">Male
+                                <input type="radio" name="seeking" value="male" class="form-check-input"
+                                <check if="{{ @seeking == male }}">
+                                    checked
+                                </check>>Male
                             </label>
                             <label class="form-check-label">
-                                <input type="radio" name="seeking" value="female" class="form-check-input">Female
+                                <input type="radio" name="seeking" value="female" class="form-check-input"
+                                <check if="{{ @seeking == female }}">
+                                    checked
+                                </check>>Female
                             </label>
                         </div><br>
                     </section>
@@ -45,7 +51,7 @@
 
                     <section class="col-4">
                         <label class="form-control-label">Biography</label>
-                        <textarea name="bio" class="form-control" rows="5"></textarea>
+                        <textarea name="bio" class="form-control" rows="5">{{ @bio }}</textarea>
                     </section>
                 </div>
                 <div class="row">

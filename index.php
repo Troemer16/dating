@@ -27,38 +27,87 @@
     $f3->route('GET|POST /personal', function($f3) {
         if(isset($_POST['submit']))
         {
-            $f3->set('name', $_POST['first'].' '.$_POST['last']);
-            $f3->set('age', $_POST['age']);
-            $f3->set('gender', $_POST['gender']);
-            $f3->set('phone', $_POST['phone']);
-            header("Location: http://troemer.greenriverdev.com/328/dating/profile");
+            $errors = array();
+            if(validPersonal($_POST['first'], $_POST['last'], $_POST['age'], $_POST['phone'], $errors)){
+                $name = $_POST['first'].' '.$_POST['last'];
+                $_SESSION['name'] = $name;
+                $_SESSION['age'] = $_POST['age'];
+                $_SESSION['gender'] = $_POST['gender'];
+                $_SESSION['phone'] = $_POST['phone'];
+                header("Location: http://troemer.greenriverdev.com/328/dating/profile");
+            }
+            else{
+                $f3->set('first', $_POST['first']);
+                $f3->set('last', $_POST['last']);
+                $f3->set('age', $_POST['age']);
+                $f3->set('gender', $_POST['gender']);
+                $f3->set('phone', $_POST['phone']);
+                $f3->set('errors', $errors);
+            }
         }
 
         $template = new Template();
         echo $template->render('views/personal.html');
     });
 
-    $f3->route('GET|POST /profile', function() {
+    $f3->route('GET|POST /profile', function($f3) {
         if(isset($_POST['submit']))
         {
-            header("Location: http://troemer.greenriverdev.com/328/dating/interests");
+            if(empty($_POST['email'])){
+                $errors['email'] = 'Email is required';
+                $f3->set('email', $_POST['email']);
+                $f3->set('state', $_POST['state']);
+                $f3->set('seeking', $_POST['seeking']);
+                $f3->set('bio', $_POST['bio']);
+                $f3->set('errors', $errors);
+            }
+            else{
+                $_SESSION['email'] = $_POST['email'];
+                $_SESSION['state'] = $_POST['state'];
+                $_SESSION['seeking'] = $_POST['seeking'];
+                $_SESSION['bio'] = $_POST['bio'];
+                header("Location: http://troemer.greenriverdev.com/328/dating/interests");
+            }
         }
 
         $template = new Template();
         echo $template->render('views/profile.html');
     });
 
-    $f3->route('GET|POST /interests', function() {
+    $f3->route('GET|POST /interests', function($f3) {
         if(isset($_POST['submit']))
         {
-            header("Location: http://troemer.greenriverdev.com/328/dating/summary");
+            $errors['indoor'] = validIndoor($_POST['indoor']);
+            $errors['outdoor'] = validOutdoor($_POST['outdoor']);
+
+            if(empty(implode("", $errors))){
+                $_SESSION['indoor'] = $_POST['indoor'];
+                $_SESSION['outdoor'] = $_POST['outdoor'];
+                header("Location: http://troemer.greenriverdev.com/328/dating/summary");
+            }
+            else{
+                $f3->set('indoor', $_POST['indoor']);
+                $f3->set('outdoor', $_POST['outdoor']);
+                $f3->set('errors', $errors);
+            }
         }
 
         $template = new Template();
         echo $template->render('views/interests.html');
     });
 
-    $f3->route('GET|POST /summary', function() {
+    $f3->route('GET|POST /summary', function($f3) {
+        $f3->set('name', $_SESSION['name']);
+        $f3->set('age', $_SESSION['age']);
+        $f3->set('gender', $_SESSION['gender']);
+        $f3->set('phone', $_SESSION['phone']);
+        $f3->set('email', $_SESSION['email']);
+        $f3->set('state', $_SESSION['state']);
+        $f3->set('seeking', $_SESSION['seeking']);
+        $f3->set('bio', $_SESSION['bio']);
+        $f3->set('indoor', $_SESSION['indoor']);
+        $f3->set('outdoor', $_SESSION['outdoor']);
+
         $template = new Template();
         echo $template->render('views/summary.html');
     });

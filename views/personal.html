@@ -20,26 +20,44 @@
                 <div class="row">
                     <section class="col-8">
                         <label class="form-control-label">First Name</label>
-                        <input type="text" name="first" class="form-control"><br>
+                        <input type="text" name="first" class="form-control" value="{{ @first }}">
+                        <check if="{{ @errors['first'] }}">
+                            <p class="text-danger">First {{ @errors['first'] }}</p>
+                        </check><br>
                         <label class="form-control-label">Last Name</label>
-                        <input type="text" name="last" class="form-control"><br>
+                        <input type="text" name="last" class="form-control" value="{{ @last }}">
+                        <check if="{{ @errors['last'] }}">
+                            <p class="text-danger">Last {{ @errors['last'] }}</p>
+                        </check><br>
 
                         <label class="form-control-label">Age</label>
-                        <input type="text" name="age" class="form-control"><br>
+                        <input type="text" name="age" class="form-control" value="{{ @age }}">
+                        <check if="{{ @errors['age'] }}">
+                            <p class="text-danger">{{ @errors['age'] }}</p>
+                        </check><br>
 
                         <label>Gender</label><br>
                         <div class="form-check form-check-inline">
                             <label class="form-check-label">
-                                <input type="radio" name="gender" value="male" class="form-check-input">Male
+                                <input type="radio" name="gender" value="male" class="form-check-input"
+                                <check if="{{ @gender == male }}">
+                                    checked
+                                </check>>Male
                             </label>
                             <label class="form-check-label">
-                                <input type="radio" name="gender" value="female" class="form-check-input">Female
+                                <input type="radio" name="gender" value="female" class="form-check-input"
+                                <check if="{{ @gender == female }}">
+                                    checked
+                                </check>>Female
                             </label>
                         </div><br><br>
 
 
                         <label class="form-control-label">Phone Number</label>
-                        <input type="text" name="phone" class="form-control"><br>
+                        <input type="text" name="phone" class="form-control" value="{{ @phone }}">
+                        <check if="{{ @errors['phone'] }}">
+                            <p class="text-danger">{{ @errors['phone'] }}</p>
+                        </check><br>
                     </section>
 
 

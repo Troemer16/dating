@@ -18,28 +18,28 @@
                 <div class="col-6">
                     <table class="table table-bordered">
                         <tr>
-                            <td>Name: </td>
+                            <td>Name: {{ @name }}</td>
                         </tr>
                         <tr>
-                            <td>Gender: </td>
+                            <td>Gender: {{ ucfirst(@gender) }}</td>
                         </tr>
                         <tr>
-                            <td>Age: </td>
+                            <td>Age: {{ @age }}</td>
                         </tr>
                         <tr>
-                            <td>Phone: </td>
+                            <td>Phone: {{ @phone }}</td>
                         </tr>
                         <tr>
-                            <td>Email: </td>
+                            <td>Email: {{ @email }}</td>
                         </tr>
                         <tr>
-                            <td>State: </td>
+                            <td>State: {{ ucfirst(@state) }}</td>
                         </tr>
                         <tr>
-                            <td>Seeking: </td>
+                            <td>Seeking: {{ ucfirst(@seeking) }}</td>
                         </tr>
                         <tr>
-                            <td>Interests: </td>
+                            <td>Interests: {{ implode(", ", @indoor).', '.implode(", ", @outdoor) }}</td>
                         </tr>
                     </table>
                 </div>
@@ -47,7 +47,7 @@
                 <div class="col-6">
                     <img src="images/Summary.PNG" class="img-fluid rounded mx-auto d-block">
                     <h4>Biography</h4>
-                    <p id="summaryBio"></p>
+                    <p id="summaryBio">{{ @bio }}</p>
                 </div>
             </div>
 
@@ -57,5 +57,9 @@
                 </div>
             </div>
         </div>
+
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.6/umd/popper.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/js/bootstrap.min.js"></script>
     </body>
 </html>
