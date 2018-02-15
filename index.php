@@ -1,13 +1,14 @@
 <?php
-    //start session
-    session_start();
-
     //php error reporting
     ini_set("display_errors", 1);
     error_reporting(E_ALL);
 
     //require the autoload file
     require_once ('vendor/autoload.php');
+
+    //start session
+    session_start();
+
     //include validation functions
     include ('model/validate.php');
 
@@ -53,6 +54,7 @@
     $f3->route('GET|POST /profile', function($f3) {
         if(isset($_POST['submit']))
         {
+            $errors = array();
             if(empty($_POST['email'])){
                 $errors['email'] = 'Email is required';
                 $f3->set('email', $_POST['email']);
@@ -77,6 +79,7 @@
     $f3->route('GET|POST /interests', function($f3) {
         if(isset($_POST['submit']))
         {
+            $errors = array();
             $errors['indoor'] = validIndoor($_POST['indoor']);
             $errors['outdoor'] = validOutdoor($_POST['outdoor']);
 
@@ -105,8 +108,14 @@
         $f3->set('state', $_SESSION['state']);
         $f3->set('seeking', $_SESSION['seeking']);
         $f3->set('bio', $_SESSION['bio']);
-        $f3->set('indoor', $_SESSION['indoor']);
-        $f3->set('outdoor', $_SESSION['outdoor']);
+        if(isset($_SESSION['indoor']))
+            $f3->set('indoor', $_SESSION['indoor']);
+        else
+            $f3->set('indoor', array());
+        if(isset($_SESSION['outdoor']))
+            $f3->set('outdoor', $_SESSION['outdoor']);
+        else
+            $f3->set('outdoor', array());
 
         $template = new Template();
         echo $template->render('views/summary.html');

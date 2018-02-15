@@ -54,18 +54,22 @@
 
     function validOutdoor($outdoor) {
         $input = array('hiking', 'biking', 'swimming', 'collecting', 'walking', 'climbing', '');
-        foreach ($outdoor as $interest) {
-            if(!in_array($interest, $input))
-                return 'Please select valid outdoor interests.';
+        if(!empty($outdoor)){
+            foreach ($outdoor as $interest) {
+                if(!in_array($interest, $input))
+                    return 'Please select valid outdoor interests.';
+            }
         }
         return '';
     }
 
     function validIndoor($indoor) {
         $input = array('tv', 'movies', 'cooking', 'board', 'puzzles', 'reading', 'cards', 'video', '');
-        foreach ($indoor as $interest) {
-            if(!in_array($interest, $input))
-                return 'Please select valid indoor interests.';
+        if(!empty($outdoor)){
+            foreach ($indoor as $interest) {
+                if(!in_array($interest, $input))
+                    return 'Please select valid indoor interests.';
+            }
         }
         return '';
     }

@@ -39,7 +39,11 @@
                             <td>Seeking: {{ ucfirst(@seeking) }}</td>
                         </tr>
                         <tr>
-                            <td>Interests: {{ implode(", ", @indoor).', '.implode(", ", @outdoor) }}</td>
+                            <td>Interests: {{ implode(", ", @indoor) }}
+                                <check if="{{ !empty(@outdoor) }}">
+                                    {{ ', '.implode(", ", @outdoor) }}
+                                </check>
+                                </td>
                         </tr>
                     </table>
                 </div>
