@@ -30,12 +30,12 @@
         {
             $errors = array();
             if(validPersonal($_POST['first'], $_POST['last'], $_POST['age'], $_POST['phone'], $errors)){
-                if($_POST['premium'] == 'true')
-                    $member = Premium($_POST['first'], $_POST['last'], $_POST['age'], $_POST['gender'], $_POST['phone']);
+                if($_POST['premium'] == 'premium')
+                    $member = new Premium($_POST['first'], $_POST['last'], $_POST['age'], $_POST['gender'], $_POST['phone']);
                 else
-                    $member = Member($_POST['first'], $_POST['last'], $_POST['age'], $_POST['gender'], $_POST['phone']);
+                    $member = new Member($_POST['first'], $_POST['last'], $_POST['age'], $_POST['gender'], $_POST['phone']);
                 $_SESSION['member'] = $member;
-                header("Location: http://troemer.greenriverdev.com/328/dating/profile");
+                $f3->reroute('/profile');
             }
             else{
                 $f3->set('first', $_POST['first']);
@@ -43,6 +43,7 @@
                 $f3->set('age', $_POST['age']);
                 $f3->set('gender', $_POST['gender']);
                 $f3->set('phone', $_POST['phone']);
+                $f3->set('premium', $_POST['premium']);
                 $f3->set('errors', $errors);
             }
         }
@@ -55,20 +56,25 @@
         if(isset($_POST['submit']))
         {
             $errors = array();
-            if(empty($_POST['email'])){
+            if(!empty($_POST['email'])){
+                $member = $_SESSION['member'];
+                $member.setEmail($_POST['email']);
+                $member.setState($_POST['state']);
+                $member.setSeeking($_POST['seeking']);
+                $member.setBio($_POST['bio']);
+                $_SESSION['member'] = $member;
+                if(get_class($member) == 'Premium')
+                    $f3->reroute('/interests');
+                else
+                    $f3->reroute('/summary');
+            }
+            else{
                 $errors['email'] = 'Email is required';
                 $f3->set('email', $_POST['email']);
                 $f3->set('state', $_POST['state']);
                 $f3->set('seeking', $_POST['seeking']);
                 $f3->set('bio', $_POST['bio']);
                 $f3->set('errors', $errors);
-            }
-            else{
-                $_SESSION['email'] = $_POST['email'];
-                $_SESSION['state'] = $_POST['state'];
-                $_SESSION['seeking'] = $_POST['seeking'];
-                $_SESSION['bio'] = $_POST['bio'];
-                header("Location: http://troemer.greenriverdev.com/328/dating/interests");
             }
         }
 
@@ -84,9 +90,10 @@
             $errors['outdoor'] = validOutdoor($_POST['outdoor']);
 
             if(empty(implode("", $errors))){
-                $_SESSION['indoor'] = $_POST['indoor'];
-                $_SESSION['outdoor'] = $_POST['outdoor'];
-                header("Location: http://troemer.greenriverdev.com/328/dating/summary");
+                $member = $_SESSION['member'];
+                $member.setInDoor($_POST['indoor']);
+                $member.setOutDoor($_POST['outdoor']);
+                $f3->reroute('/summary');
             }
             else{
                 $f3->set('indoor', $_POST['indoor']);

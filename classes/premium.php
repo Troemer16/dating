@@ -1,41 +1,29 @@
 <?php
 
-class Premium extends Member
-{
-    private $_inDoorInterests;
-    private $_outDoorInterests;
-
-    //setters
-    /**
-     * @param mixed $inDoorIntersts
-     */
-    public function setInDoorInterests($inDoorInterests)
+    class Premium extends Member
     {
-        $this->_inDoorInterests = $inDoorInterests;
-    }
+        private $_inDoor;
+        private $_outDoor;
 
-    /**
-     * @param mixed $outDoorInterests
-     */
-    public function setOutDoorInterests($outDoorInterests)
-    {
-        $this->_outDoorInterests = $outDoorInterests;
-    }
+        //setters
+        public function setInDoor($inDoor)
+        {
+            $this->_inDoor = $inDoor;
+        }
 
-    //getters
-    /**
-     * @return mixed
-     */
-    public function getInDoorInterests()
-    {
-        return $this->_inDoorInterests;
-    }
+        public function setOutDoor($outDoor)
+        {
+            $this->_outDoor = $outDoor;
+        }
 
-    /**
-     * @return mixed
-     */
-    public function getOutDoorInterests()
-    {
-        return $this->_outDoorInterests;
+        //getters
+        public function getInDoor()
+        {
+            return $this->_inDoor;
+        }
+
+        public function getOutDoor()
+        {
+            return $this->_outDoor;
+        }
     }
-}
