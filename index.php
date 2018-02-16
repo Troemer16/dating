@@ -58,10 +58,10 @@
             $errors = array();
             if(!empty($_POST['email'])){
                 $member = $_SESSION['member'];
-                $member.setEmail($_POST['email']);
-                $member.setState($_POST['state']);
-                $member.setSeeking($_POST['seeking']);
-                $member.setBio($_POST['bio']);
+                $member->setEmail($_POST['email']);
+                $member->setState($_POST['state']);
+                $member->setSeeking($_POST['seeking']);
+                $member->setBio($_POST['bio']);
                 $_SESSION['member'] = $member;
                 if(get_class($member) == 'Premium')
                     $f3->reroute('/interests');
@@ -91,8 +91,8 @@
 
             if(empty(implode("", $errors))){
                 $member = $_SESSION['member'];
-                $member.setInDoor($_POST['indoor']);
-                $member.setOutDoor($_POST['outdoor']);
+                $member->setInDoor($_POST['indoor']);
+                $member->setOutDoor($_POST['outdoor']);
                 $f3->reroute('/summary');
             }
             else{
@@ -107,6 +107,7 @@
     });
 
     $f3->route('GET|POST /summary', function($f3) {
+        print_r($_SESSION['member']);
         $f3->set('name', $_SESSION['name']);
         $f3->set('age', $_SESSION['age']);
         $f3->set('gender', $_SESSION['gender']);
