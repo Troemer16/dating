@@ -58,6 +58,14 @@
                         <check if="{{ @errors['phone'] }}">
                             <p class="text-danger">{{ @errors['phone'] }}</p>
                         </check><br>
+
+                        <label class="form-control-label">Premium Membership</label><br>
+                        <label class="form-check-label" id="premium">
+                            <input type="checkbox" class="form-check-input" name="premium" value="premium"
+                            <check if="{{ isset(@premium) }}">
+                                checked
+                            </check>>Sign me up for a Premium Account!
+                        </label>
                     </section>
 
 

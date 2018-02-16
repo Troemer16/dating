@@ -30,11 +30,11 @@
         {
             $errors = array();
             if(validPersonal($_POST['first'], $_POST['last'], $_POST['age'], $_POST['phone'], $errors)){
-                $name = $_POST['first'].' '.$_POST['last'];
-                $_SESSION['name'] = $name;
-                $_SESSION['age'] = $_POST['age'];
-                $_SESSION['gender'] = $_POST['gender'];
-                $_SESSION['phone'] = $_POST['phone'];
+                if($_POST['premium'] == 'true')
+                    $member = Premium($_POST['first'], $_POST['last'], $_POST['age'], $_POST['gender'], $_POST['phone']);
+                else
+                    $member = Member($_POST['first'], $_POST['last'], $_POST['age'], $_POST['gender'], $_POST['phone']);
+                $_SESSION['member'] = $member;
                 header("Location: http://troemer.greenriverdev.com/328/dating/profile");
             }
             else{
