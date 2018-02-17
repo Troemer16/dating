@@ -28,6 +28,7 @@
     $f3->route('GET|POST /personal', function($f3) {
         if(isset($_POST['submit']))
         {
+            //create proper object based on user selection after input passes validation
             $errors = array();
             if(validPersonal($_POST['first'], $_POST['last'], $_POST['age'], $_POST['phone'], $errors)){
                 if($_POST['premium'] == 'premium')
@@ -63,6 +64,7 @@
                 $member->setSeeking($_POST['seeking']);
                 $member->setBio($_POST['bio']);
                 $_SESSION['member'] = $member;
+
                 if(get_class($member) == 'Premium')
                     $f3->reroute('/interests');
                 else
@@ -117,6 +119,7 @@
         $f3->set('state', $member->getState());
         $f3->set('seeking', $member->getSeeking());
         $f3->set('bio', $member->getBio());
+
         if(get_class($member) == 'Premium'){
             if(!empty($member->getInDoor()))
                 $f3->set('indoor', $member->getInDoor());
