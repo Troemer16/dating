@@ -93,6 +93,7 @@
                 $member = $_SESSION['member'];
                 $member->setInDoor($_POST['indoor']);
                 $member->setOutDoor($_POST['outdoor']);
+                $_SESSION['member'] = $member;
                 $f3->reroute('/summary');
             }
             else{
@@ -107,23 +108,26 @@
     });
 
     $f3->route('GET|POST /summary', function($f3) {
-        print_r($_SESSION['member']);
-        $f3->set('name', $_SESSION['name']);
-        $f3->set('age', $_SESSION['age']);
-        $f3->set('gender', $_SESSION['gender']);
-        $f3->set('phone', $_SESSION['phone']);
-        $f3->set('email', $_SESSION['email']);
-        $f3->set('state', $_SESSION['state']);
-        $f3->set('seeking', $_SESSION['seeking']);
-        $f3->set('bio', $_SESSION['bio']);
-        if(isset($_SESSION['indoor']))
-            $f3->set('indoor', $_SESSION['indoor']);
-        else
-            $f3->set('indoor', array());
-        if(isset($_SESSION['outdoor']))
-            $f3->set('outdoor', $_SESSION['outdoor']);
-        else
-            $f3->set('outdoor', array());
+        $member = $_SESSION['member'];
+        $f3->set('name', $member->getFname().' '.$member->getLname());
+        $f3->set('age', $member->getAge());
+        $f3->set('gender', $member->getGender());
+        $f3->set('phone', $member->getPhone());
+        $f3->set('email', $member->getEmail());
+        $f3->set('state', $member->getState());
+        $f3->set('seeking', $member->getSeeking());
+        $f3->set('bio', $member->getBio());
+        if(get_class($member) == 'Premium'){
+            if(!empty($member->getInDoor()))
+                $f3->set('indoor', $member->getInDoor());
+            else
+                $f3->set('indoor', array());
+            if(!empty($member->getOutDoor()))
+                $f3->set('outdoor', $member->getOutDoor());
+            else
+                $f3->set('outdoor', array());
+            $f3->set('premium', 'premium');
+        }
 
         $template = new Template();
         echo $template->render('views/summary.html');
