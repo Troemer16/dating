@@ -10,6 +10,13 @@
  * @author Tyler Roemer <troemer@greenriver.edu>
  * @copyright 2018
  */
+
+/* Validated Class
+        setGender
+        setSeeking
+        setAge
+*/
+
 class Member
 {
     protected $fname;
@@ -72,7 +79,12 @@ class Member
      */
     function setAge($age)
     {
-        $this->age = $age;
+        //check to see if age is non numeric or negative before setting it
+        //otherwise set age to 18 (using minimum age as default value)
+        if(!is_numeric($age) || $age < 0)
+            $this->age = 18;
+        else
+            $this->age = $age;
     }
 
     /**
@@ -81,7 +93,11 @@ class Member
      */
     function setGender($gender)
     {
-        $this->gender = $gender;
+        //ensures $gender is male, female, or empty
+        if(!empty($gender) && $gender != 'female' && $gender != 'male')
+            $this->gender = '';
+        else
+            $this->gender = $gender;
     }
 
     /**
@@ -117,7 +133,11 @@ class Member
      */
     function setSeeking($seeking)
     {
-        $this->seeking = $seeking;
+        //ensures $seeking is male, female, or empty
+        if(!empty($seeking) && $seeking != 'female' && $seeking != 'male')
+            $this->seeking = '';
+        else
+            $this->seeking = $seeking;
     }
 
     /**
