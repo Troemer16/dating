@@ -5,6 +5,7 @@
 
     //require the autoload file
     require_once ('vendor/autoload.php');
+    require_once ("/home/troemerg/public_html/config.php");
 
     //start session
     session_start();
@@ -56,7 +57,6 @@
     $f3->route('GET|POST /profile', function($f3) {
         if(isset($_POST['submit']))
         {
-            $errors = array();
             if(!empty($_POST['email'])){
                 $member = $_SESSION['member'];
                 $member->setEmail($_POST['email']);
@@ -71,7 +71,7 @@
                     $f3->reroute('/summary');
             }
             else{
-                $errors['email'] = 'Email is required';
+                $errors = 'Email is required';
                 $f3->set('email', $_POST['email']);
                 $f3->set('state', $_POST['state']);
                 $f3->set('seeking', $_POST['seeking']);
@@ -90,11 +90,13 @@
             $errors = array();
             $errors['indoor'] = validIndoor($_POST['indoor']);
             $errors['outdoor'] = validOutdoor($_POST['outdoor']);
+            //$errors['image'] = validImage($_FILES['picture']);
 
             if(empty(implode("", $errors))){
                 $member = $_SESSION['member'];
                 $member->setInDoor($_POST['indoor']);
                 $member->setOutDoor($_POST['outdoor']);
+                //$member->setImage($_FILES['picture']);
                 $_SESSION['member'] = $member;
                 $f3->reroute('/summary');
             }
@@ -111,6 +113,10 @@
 
     $f3->route('GET|POST /summary', function($f3) {
         $member = $_SESSION['member'];
+
+        //print_r($member->getImage());
+        //return;
+
         $f3->set('name', $member->getFname().' '.$member->getLname());
         $f3->set('age', $member->getAge());
         $f3->set('gender', $member->getGender());
@@ -129,6 +135,8 @@
                 $f3->set('outdoor', $member->getOutDoor());
             else
                 $f3->set('outdoor', array());
+
+            //$f3->set('image', $member->getImage()['name']);
             $f3->set('premium', 'premium');
         }
 

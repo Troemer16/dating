@@ -54,7 +54,7 @@ label.first
     margin-left: 4em;
 }
 
-label#premium
+label#premium, div#fileUpload
 {
     margin-left: 1.25em;
 }
@@ -62,6 +62,11 @@ label#premium
 h4
 {
     font-weight: normal;
+}
+
+p.errors
+{
+    margin-bottom: 0em;
 }
 
 p#note
