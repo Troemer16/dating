@@ -140,6 +140,9 @@
             $f3->set('premium', 'premium');
         }
 
+        $database = new Database();
+        $database->addMember($member);
+
         $template = new Template();
         echo $template->render('views/summary.html');
     });

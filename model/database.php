@@ -22,5 +22,62 @@
 
     class Database
     {
+        private $dbh;
 
+        function __construct()
+        {
+            try {
+                //instantiate pdo
+                $this->dbh = new PDO(DB_DSN, DB_USERNAME, DB_PASSWORD);
+            } catch (PDOException $e){
+                echo $e->getMessage();
+            }
+        }
+
+        public function addMember($member)
+        {
+            //Define the query
+            $sql = "INSERT INTO `Members`(`fname`, `lname`, `age`, `gender`, `phone`, `email`, `state`, `seeking`, 
+                    `bio`, `premium`, `interests`) VALUES (:fname, :lname, :age, :gender, :phone, :email, :state, 
+                    :seeking, :bio, :premium, :interests)";
+
+            //Prepare the statement
+            $statement = $this->dbh->prepare($sql);
+
+            //Bind the parameters
+            $statement->bindParam(':fname', $member->getFname(), PDO::PARAM_STR);
+            $statement->bindParam(':lname', $member->getLname(), PDO::PARAM_STR);
+            $statement->bindParam(':age', $member->getAge(), PDO::PARAM_STR);
+            $statement->bindParam(':gender', $member->getGender(), PDO::PARAM_STR);
+            $statement->bindParam(':phone', $member->getPhone(), PDO::PARAM_STR);
+            $statement->bindParam(':email', $member->getEmail(), PDO::PARAM_STR);
+            $statement->bindParam(':state', $member->getState(), PDO::PARAM_STR);
+            $statement->bindParam(':seeking', $member->getSeeking(), PDO::PARAM_STR);
+            $statement->bindParam(':bio', $member->getBio(), PDO::PARAM_STR);
+
+            if(get_class($member) == 'Premium')
+            {
+                $premium = true;
+                $interests = implode(", ", $member->getInDoor());
+
+                if(!empty($member->getOutDoor()))
+                    $interests .= ", ".implode(", ", $member->getOutDoor());
+            }
+            else
+            {
+                $premium = false;
+                $interests = null;
+            }
+
+            $statement->bindParam(':premium', $premium, PDO::PARAM_STR);
+            $statement->bindParam(':interests', $interests, PDO::PARAM_STR);
+
+
+            //Execute
+            $statement->execute();
+
+//            //check
+//            $id = $this->dbh->lastInsertId();
+//            echo "<p>Member $id inserted successfully.</p>";
+        }
     }
