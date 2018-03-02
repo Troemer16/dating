@@ -80,4 +80,22 @@
 //            $id = $this->dbh->lastInsertId();
 //            echo "<p>Member $id inserted successfully.</p>";
         }
+
+        public function getMembers()
+        {
+            //Define the query
+            $sql = "SELECT member_id, fname, lname, age, phone, email, state, 
+                    gender, seeking, premium, interests FROM Members ORDER BY lname";
+
+            //Prepare the statement
+            $statement = $this->dbh->prepare($sql);
+
+            //Execute the statement
+            $statement->execute();
+
+            //Process the result
+            $result = $statement->fetchAll(PDO::FETCH_ASSOC);
+
+            return $result;
+        }
     }

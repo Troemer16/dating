@@ -1,0 +1,57 @@
+<!doctype html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet"
+              integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
+              crossorigin="anonymous">
+        <link rel="stylesheet" type="text/css" href="styles/styles.css">
+        <title>Admin Page</title>
+    </head>
+    <body>
+        <nav class="navbar navbar-light bg-faded">
+            <a class="navbar-brand" href="http://troemer.greenriverdev.com/328/dating">Dating Site</a>
+            <a class="navbar-brand" href="http://troemer.greenriverdev.com/328/dating/admin">Admin</a>
+        </nav>
+
+        <div class="container">
+            <h1>Membership</h1>
+            <table class="table">
+                <thead>
+                    <th>ID</th>
+                    <th>Name</th>
+                    <th>Age</th>
+                    <th>Phone</th>
+                    <th>Email</th>
+                    <th>State</th>
+                    <th>Gender</th>
+                    <th>Seeking</th>
+                    <th>Premium</th>
+                    <th>Interests</th>
+                </thead>
+                <tbody>
+                <repeat group="{{ @data }}" value="{{ @member }}">
+                    <tr>
+                        <td>{{ @member['member_id'] }}</td>
+                        <td>{{ @member['fname'].' '.@member['lname']}}</td>
+                        <td>{{ @member['age'] }}</td>
+                        <td>{{ '('.substr(@member['phone'], 0, 3).')'.substr(@member['phone'], 3, 3).'-'.substr(@member['phone'], 6) }}</td>
+                        <td>{{ @member['email'] }}</td>
+                        <td>{{ strtoupper(substr(@member['state'], 0, 2)) }}</td>
+                        <td>{{ strtoupper(@member['gender'][0]) }}</td>
+                        <td>{{ strtoupper(@member['seeking'][0]) }}</td>
+                        <td>
+                            <input type="checkbox" class="form-check-input text-primary" disabled
+                            <check if="{{ @member['premium'] }}">
+                                checked
+                            </check>>
+                        </td>
+
+                        <td>{{ @member['interests'] }}</td>
+                    </tr>
+                </repeat>
+                </tbody>
+            </table>
+        </div>
+    </body>
+<html>

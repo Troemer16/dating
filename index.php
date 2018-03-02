@@ -147,6 +147,43 @@
         echo $template->render('views/summary.html');
     });
 
+    $f3->route('GET|POST /admin', function($f3) {
+//        $ids = array();
+//        $names = array();
+//        $ages = array();
+//        $phones = array();
+//        $emails = array();
+//        $states = array();
+//        $genders = array();
+//        $seekings = array();
+//        $premiums = array();
+//        $interests = array();
+//
+//
+//        $db = new Database()
+//        $result = $db->getMembers();
+//
+//        foreach ($result as $row) {
+//            array_push($ids, $row['member_id']);
+//            array_push($names, $row['fname'].' '.$row['lname']);
+//            array_push($ages, $row['age']);
+//            array_push($phones, $row['phone']);
+//            array_push($emails, $row['email']);
+//            array_push($states, $row['state']);
+//            array_push($genders, $row['gender']);
+//            array_push($seekings, $row['seeking']);
+//            array_push($premiums, $row['premium']);
+//            array_push($interests, $row['interests']);
+//        }
+
+        $db = new Database();
+        $result = $db->getMembers();
+        $f3->set('data', $result);
+
+        $template = new Template();
+        echo $template->render('views/admin.html');
+    });
+
     //Run Fat-Free
     $f3->run();
 ?>
